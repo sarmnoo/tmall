@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tmall.bean.Product;
 import tmall.bean.ProductImage;
+import tmall.dao.ProductImageDAO;
 import tmall.util.ImageUtil;
 import tmall.util.Page;
 
@@ -57,7 +57,7 @@ public class ProductImageServlet extends BaseBackServlet {
 		String imageFolder_small = null;// 定义小图片文件夹
 		String imageFolder_middle = null;// 定义中图片文件夹
 
-		if (productImageDAO.type_Single.equals(pi.getType())) {
+		if (ProductImageDAO.type_Single.equals(pi.getType())) {
 			imageFolder = request.getSession().getServletContext().getRealPath("img/productSingle");
 			imageFolder_small = request.getSession().getServletContext().getRealPath("img/productSingle_small");
 			imageFolder_middle = request.getSession().getServletContext().getRealPath("img/productSingle_middle");
@@ -79,12 +79,13 @@ public class ProductImageServlet extends BaseBackServlet {
 				
 				BufferedImage img = ImageUtil.change2jpg(f);
 				ImageIO.write(img, "jpg", f);
-				if(productImageDAO.type_Single.equals(pi.getType())){
+				if(ProductImageDAO.type_Single.equals(pi.getType())){
 					File file_small = new File(imageFolder_small,fileName);
 					File file_middle = new File(imageFolder_middle,fileName);
 					ImageUtil.resizeImage(f, 56, 56, file_small);
 					ImageUtil.resizeImage(f, 217, 190, file_middle);
 				}
+				fos.close();
 			}
 		} catch (IOException e) {
 			
@@ -106,7 +107,7 @@ public class ProductImageServlet extends BaseBackServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		ProductImage pi = productImageDAO.get(id);
 		productImageDAO.delete(pi.getId());
-		if (productImageDAO.type_Single.equals(pi.getType())) {
+		if (ProductImageDAO.type_Single.equals(pi.getType())) {
 			String imageFolder_single = request.getSession().getServletContext().getRealPath("img/productSingle");
 			String imageFolder_small = request.getSession().getServletContext().getRealPath("img/productSingle_small");
 			String imageFolder_middle = request.getSession().getServletContext()
@@ -163,8 +164,8 @@ public class ProductImageServlet extends BaseBackServlet {
 	public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		Product p = productDAO.get(pid);
-		List<ProductImage> productSingleImage = productImageDAO.list(p, productImageDAO.type_Single);
-		List<ProductImage> productDetailImage = productImageDAO.list(p, productImageDAO.type_detail);
+		List<ProductImage> productSingleImage = productImageDAO.list(p, ProductImageDAO.type_Single);
+		List<ProductImage> productDetailImage = productImageDAO.list(p, ProductImageDAO.type_detail);
 		request.setAttribute("simg", productSingleImage);
 		request.setAttribute("dimg", productDetailImage);
 		request.setAttribute("p", p);
