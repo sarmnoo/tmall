@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import tmall.bean.Category;
 import tmall.bean.Product;
-import tmall.bean.Property;
 import tmall.bean.PropertyValue;
 import tmall.util.Page;
 
