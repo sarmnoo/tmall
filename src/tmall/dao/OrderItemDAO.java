@@ -165,7 +165,7 @@ public class OrderItemDAO {
 	 * @return 购物车里面的订单项目条数集合
 	 */
 	public List<OrderItem> listByUser(int uid, int start, int count) {
-		String sql = "select count(*) from orderitem where uid=? and oid=-1 order by id desc limit ?,?";
+		String sql = "select * from orderitem where uid=? and oid=-1 order by id desc limit ?,?";
 		List<OrderItem> beans = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, uid);
@@ -210,7 +210,7 @@ public class OrderItemDAO {
 	 * @return 相应条目数的订单项目List集合
 	 */
 	public List<OrderItem> listByOrder(int oid, int start, int count) {
-		String sql = "select count(*) from orderitem where oid=? order by id desc limit ?,?";
+		String sql = "select * from orderitem where oid=? order by id desc limit ?,?";
 		List<OrderItem> beans = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, oid);

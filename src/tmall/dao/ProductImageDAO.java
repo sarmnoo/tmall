@@ -136,8 +136,8 @@ public class ProductImageDAO {
 	 * @param count 查询条目数
 	 * @return 对应的条目数的产品图片List集合
 	 */
-	public List<ProductImage> list(Product p, String type,int start,int count){
-		String sql = "select * from productimage where type=? and cid = ? order by id desc limit ?,?";
+	public List<ProductImage> list(Product p,String type,int start,int count){
+		String sql = "select * from productimage where type=? and pid=? order by id desc limit ?,?";
 		List<ProductImage> beans = new ArrayList<>();		
 		try(Connection conn =DBUtil.getConnection();PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1,type);

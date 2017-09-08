@@ -33,7 +33,7 @@ public class OrderDAO {
 	 * @return 订单数量
 	 */
 	public int getTotal() {
-		String sql = "select count(*) from order";
+		String sql = "select count(*) from order_";
 		int total = 0;
 		try (Connection conn = DBUtil.getConnection(); Statement st = conn.createStatement()) {
 			ResultSet rs = st.executeQuery(sql);
@@ -173,7 +173,7 @@ public class OrderDAO {
 	 * @return 相应的条目数的 Order订单对象的List集合
 	 */
 	public List<Order> list(int start, int count) {
-		String sql = "select count(*) from order_  order by id desc limit ?,? ";
+		String sql = "select * from  order_  order by id desc limit ?,? ";
 		List<Order> beans = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, start);
@@ -229,7 +229,7 @@ public class OrderDAO {
 	 * @return 对应用户指定订单状态的的所有订单
 	 */
 	public List<Order> list(int uid, String excludedStatus, int start, int count) {
-		String sql = "select count(*) from order_ where uid=? and status!=excludedStatus order by uid desc limit ?,? ";
+		String sql = "select * from order_ where uid=? and status!=\"excludedStatus\" order by uid desc limit ?,? ";
 		List<Order> beans = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, uid);

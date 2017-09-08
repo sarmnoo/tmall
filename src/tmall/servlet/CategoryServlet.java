@@ -18,9 +18,9 @@ import tmall.util.ImageUtil;
 import tmall.util.Page;
 
 /**
- * @author Kr:
- * @version 创建时间：2017年5月22日 下午7:15:30 
- * 类说明
+ * @author Kr
+ * 创建时间：2017年5月22日 下午7:15:30 
+ * 类说明：产品分类servlet,对分类产品页面进行增删改查操作；
  */
 public class CategoryServlet extends BaseBackServlet {
 	

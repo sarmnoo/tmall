@@ -26,7 +26,7 @@ public class PropertyValueDAO {
 	 * @return 属性值总数
 	 */
 	public int getTotal() {
-		String sql = "select count(*) from PropertyValue";
+		String sql = "select count(*) from propertyvalue";
 		int total = 0;
 		try (Connection conn = DBUtil.getConnection(); Statement st = conn.createStatement()) {
 			ResultSet rs = st.executeQuery(sql);
@@ -46,7 +46,7 @@ public class PropertyValueDAO {
 	 *            被添加的属性值对象
 	 */
 	public void add(PropertyValue bean) {
-		String sql = "insert into perpertyvalue values(null,?,?,?)";
+		String sql = "insert into propertyvalue values(null,?,?,?)";
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, bean.getProduct().getId());
 			ps.setInt(2, bean.getProperty().getId());
@@ -68,7 +68,7 @@ public class PropertyValueDAO {
 	 *            属性值的id
 	 */
 	public void delete(int id) {
-		String sql = "delete * from perpertyvalue where id =" + id;
+		String sql = "delete * from propertyvalue where id =" + id;
 		try (Connection conn = DBUtil.getConnection(); Statement st = conn.createStatement()) {
 			st.execute(sql);
 		} catch (SQLException e) {
@@ -83,7 +83,7 @@ public class PropertyValueDAO {
 	 *            被更新的属性值对象
 	 */
 	public void update(PropertyValue bean) {
-		String sql = "update perpertyvalue set pid=?,ptid=?,value=? where id=?";
+		String sql = "update propertyvalue set pid=?,ptid=?,value=? where id=?";
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, bean.getProduct().getId());
 			ps.setInt(2, bean.getProperty().getId());
@@ -103,7 +103,7 @@ public class PropertyValueDAO {
 	 * @return 返回id对应的属性值对象PropertyValue
 	 */
 	public PropertyValue get(int id) {
-		String sql = "select * form propertyvalue where id =" + id;
+		String sql = "select * from propertyvalue where id =" + id;
 		PropertyValue bean = new PropertyValue();
 		try (Connection conn = DBUtil.getConnection(); Statement st = conn.createStatement()) {
 			ResultSet rs = st.executeQuery(sql);
@@ -129,7 +129,7 @@ public class PropertyValueDAO {
 	 * @return 对应的属性值对象PropertyValue
 	 */
 	public PropertyValue get(int ptid, int pid) {
-		String sql = "select * form propertyvalue where ptid =? and pid=?";
+		String sql = "select * from propertyvalue where ptid =? and pid=?";
 		PropertyValue bean = new PropertyValue();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, ptid);
@@ -176,7 +176,7 @@ public class PropertyValueDAO {
 	 * @return 对应的产品的全部PropertyValue属性值List集合
 	 */
 	public List<PropertyValue> list(int pid) {
-		String sql = "select * from PropertyValue where pid=? order by ptid desc";
+		String sql = "select * from propertyvalue where pid=? order by ptid desc";
 		List<PropertyValue> beans = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, pid);
@@ -210,7 +210,7 @@ public class PropertyValueDAO {
 	 * @return
 	 */
 	public List<PropertyValue> list(int start, int count) {
-		String sql = "select count(*) from PropertyValue order by id limit ?,?";
+		String sql = "select count(*) from propertyvalue order by id limit ?,?";
 		List<PropertyValue> beans = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, start);

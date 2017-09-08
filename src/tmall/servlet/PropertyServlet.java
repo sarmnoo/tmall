@@ -15,14 +15,10 @@ import tmall.dao.PropertyDAO;
 import tmall.util.Page;
 
 /**
-* @author 
+* @author Kr
 * @version 创建时间：2017年8月20日 下午1:25:49
-* 类说明
+* 类说明：
 */
-/**
- * @author coito
- *
- */
 public class PropertyServlet extends BaseBackServlet {
 
 	/*
@@ -44,7 +40,7 @@ public class PropertyServlet extends BaseBackServlet {
 		property.setCategory(c);
 		
 		propertyDAO.add(property);
-		return "@admin_property_list?cid="+cid;
+		return "@admin_property_list?cid="+c.getId();
 	}
 
 	/*
