@@ -5,13 +5,11 @@ package tmall.servlet;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tmall.bean.Category;
 import tmall.bean.Property;
-import tmall.dao.PropertyDAO;
 import tmall.util.Page;
 
 /**
